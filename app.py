@@ -125,7 +125,7 @@ def tambahPinjam():
             cursor.execute("SELECT stok FROM tbuku WHERE kodeBuku=%s", (kodeBuku,))
             stok = cursor.fetchall()
             
-            if(stok[0][0] > 0):
+            if(stok[0][0] > 1):
                 cursor.execute("INSERT INTO tpinjam(kodePinjam, kodeBuku, NIM, tglPinjam) VALUES(%s, %s, %s, %s)", (kodePinjam, kodeBuku, nim, tanggalPinjam))
                 cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] - 1, kodeBuku))
                 mysql.connection.commit()
