@@ -16,13 +16,13 @@
             <input class="form-control" type="text" id="kodebuku" name="kodebuku" value="{{ container[0][0] }}" readonly>
 
             <label class="d-block my-2" for="judulbuku">Judul Buku</label>
-            <input class="form-control" type="text" id="judulbuku" name="judulbuku" value="{{ container[0][1] }}">
+            <input class="form-control" type="text" id="judulbuku" name="judulbuku" value="{{ container[0][1] }}" required maxlength="100">
 
             <label class="d-block my-2" for="stok">Stok</label>
-            <input class="form-control" type="number" id="stok" name="stok" value="{{ container[0][2] }}">
+            <input class="form-control" type="number" id="stok" name="stok" value="{{ container[0][2] }}" required min="0">
 
             <div class="my-3 d-flex justify-content-end">
-                <a class="btn btn-danger" href="{{ url_for('daftar') }}">Batal</a>
+                <a class="btn btn-danger" href="{{ url_for('daftarBuku') }}">Batal</a>
                 <button class="btn btn-success ms-2" type="submit">Simpan</button>   
             </div>
         </form>

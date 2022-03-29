@@ -1,0 +1,45 @@
+{% extends './components/base.html' %}
+
+{% block head %}
+<title>Sunlight - Tambah Buku</title>
+{% endblock %}
+
+{% block body %}
+{% include './components/navbar.html' %}
+
+<div class="app__tambahBuku row">
+    <div class="app__tambahBuku-inner">
+        <h1 class="text-center pt-4 pb-2">Kembali Buku</h1>
+
+        <form method="POST" action="" class="">
+            <label class="d-block my-2" for="kodeKembali">Kode Kembali</label>
+            <input class="form-control" type="text" id="kodeKembali" name="kodeKembali" required maxlength="10">
+
+            <label class="d-block my-2" for="kodebuku">Kode Buku</label>
+            <select class="form-select" id="kodebuku" name="kodebuku" required>
+                {% for kodebuku in container[0] %}
+                    <option value={{ kodebuku[0] }}> {{ kodebuku[0] }} - {{ kodebuku[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="d-block my-2" for="NIM">NIM</label>
+            <select class="form-select" id="NIM" name="NIM" required>
+                {% for nim in container[1] %}
+                    <option value={{ nim[0] }}> {{ nim[0] }} - {{ nim[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="d-block my-2" for="tanggalKembali">Tanggal Kembali</label>
+            <input class="form-control" type="date" id="tanggalKembali" name="tanggalKembali" required>
+
+            <div class="my-3 d-flex justify-content-end">
+                <a class="btn btn-danger" href="{{ url_for('kembali') }}">Batal</a>
+                <button class="btn btn-success ms-2" type="submit">Simpan</button>   
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include './components/footer.html' %}
+{% endblock body %}
+

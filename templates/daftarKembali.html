@@ -1,0 +1,48 @@
+{% extends './components/base.html' %} 
+
+{% block head %}
+<title>Daftar Peminjam</title>
+{% endblock %} 
+
+{% block body %} 
+{% include './components/navbar.html' %}
+
+<div class="app__daftarBuku row px-3">
+  <div class="p-0 d-grid d-md-block">
+    <a
+      class="app__daftarBuku-tambah btn btn-sm btn-danger my-2"
+      href="{{ url_for('daftarBuku') }}"
+    >
+       Back
+    </a>
+    <a
+      class="app__daftarBuku-tambah btn btn-sm btn-primary my-2"
+      href="{{ url_for('tambahKembali') }}"
+    >
+      <i class="bi bi-plus-square"></i> Tambah Kembali
+    </a>
+  </div>
+
+  <table
+    class="app__daftarBuku-table table table-striped table-bordered text-center"
+  >
+    <tr class="table-primary align-items-center">
+      <th class="col-3 align-middle">Kode Kembali</th>
+      <th class="col-3 align-middle">Kode Buku</th>
+      <th class="col-3 align-middle">NIM</th>
+      <th class="col-3 align-middle">Tanggal Kembali</th>
+    </tr>
+
+    {% for data in container %}
+    <tr>
+      <td class="align-middle">{{ data[0] }}</td>
+      <td class="align-middle">{{ data[1] }}</td>
+      <td class="align-middle">{{ data[2] }}</td>
+      <td class="align-middle">{{ data[3] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% include './components/footer.html' %} 
+{% endblock body %}

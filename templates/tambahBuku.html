@@ -13,16 +13,16 @@
 
         <form method="POST" action="" class="">
             <label class="d-block my-2" for="kodebuku">Kode buku</label>
-            <input class="form-control" type="text" id="kodebuku" name="kodebuku">
+            <input class="form-control" type="text" id="kodebuku" name="kodebuku" required maxlength="10">
 
             <label class="d-block my-2" for="judulbuku">Judul Buku</label>
-            <input class="form-control" type="text" id="judulbuku" name="judulbuku">
+            <input class="form-control" type="text" id="judulbuku" name="judulbuku" required maxlength="100">
 
             <label class="d-block my-2" for="stok">Stok</label>
-            <input class="form-control" type="number" id="stok" name="stok">
+            <input class="form-control" type="number" id="stok" name="stok" required min="0">
 
             <div class="my-3 d-flex justify-content-end">
-                <a class="btn btn-danger" href="{{ url_for('daftar') }}">Batal</a>
+                <a class="btn btn-danger" href="{{ url_for('daftarBuku') }}">Batal</a>
                 <button class="btn btn-success ms-2" type="submit">Simpan</button>   
             </div>
         </form>

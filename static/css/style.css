@@ -6,12 +6,12 @@
 
   --background-color: #f0f0f6;
 
-  --navbar-background-color: #e9f0a6;
+  --navbar-background-color: #CCDFEF;
 
-  --footer-background-color: #007826;
+  --footer-background-color: #32267A;
 
   --font-color-light: white;
-  --font-color-gray: #585661;
+  --font-color-gray: #1860AE;
   --font-color-dark: black;
 }
 
@@ -65,7 +65,7 @@ body {
 
 .app__home-slogan {
   color: var(--footer-background-color);
-  background-color: #E9F0A6;
+  background-color: var(--navbar-background-color);
 }
 
 .app__home-produk_label {
@@ -79,7 +79,7 @@ body {
 }
 
 .app__home-produk_list img{
-  width: 300px;
+  width: 250px;
   height: auto;
 }
 
