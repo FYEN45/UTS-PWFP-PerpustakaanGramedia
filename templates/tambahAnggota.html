@@ -1,0 +1,34 @@
+{% extends './components/base.html' %}
+
+{% block head %}
+<title>Tambah Anggota</title>
+{% endblock %}
+
+{% block body %}
+{% include './components/navbar.html' %}
+
+<div class="app__tambahBuku row">
+    <div class="app__tambahBuku-inner">
+        <h1 class="text-center pt-4 pb-2">Tambah Anggota</h1>
+
+        <form method="POST" action="" class="">
+            <label class="d-block my-2" for="NIM">NIM</label>
+            <input class="form-control" type="text" id="NIM" name="NIM" required maxlength="20">
+
+            <label class="d-block my-2" for="namamahasiswa">Nama Mahasiswa</label>
+            <input class="form-control" type="text" id="namamahasiswa" name="namamahasiswa" required maxlength="100">
+
+            <label class="d-block my-2" for="jurusan">Jurusan</label>
+            <input class="form-control" type="text" id="jurusan" name="jurusan" required maxlength="100">
+
+            <div class="my-3 d-flex justify-content-end">
+                <a class="btn btn-danger" href="{{ url_for('daftarAnggota') }}">Batal</a>
+                <button class="btn btn-success ms-2" type="submit">Simpan</button>   
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include './components/footer.html' %}
+{% endblock body %}
+

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
+import MySQLdb
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -28,47 +29,68 @@ def daftarBuku():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM tbuku')
     hasil = cursor.fetchall()
-    
+
     cursor.close()
     return render_template('daftarBuku.html', container = hasil)
 
 @app.route('/tambah', methods=['GET', 'POST'])
 def tambah():
     if (request.method == 'POST'):
-        buku = request.form
-        kodeBuku = buku['kodebuku']
-        judulBuku = buku['judulbuku']
-        stok = buku['stok']
+        try:
+            buku = request.form
+            kodeBuku = buku['kodebuku']
+            judulBuku = buku['judulbuku']
+            stok = buku['stok']
 
-        cursor = mysql.connection.cursor()
-        cursor.execute('INSERT INTO tbuku(kodeBuku, judul, stok) VALUES(%s, %s, %s)', (kodeBuku, judulBuku, stok))
-        mysql.connection.commit()
-        cursor.close()
-        return redirect('/daftarBuku')
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO tbuku(kodeBuku, judul, stok) VALUES(%s, %s, %s)', (kodeBuku, judulBuku, stok))
+            mysql.connection.commit()
+            cursor.close()
+
+            flash('Buku berhasil ditambahkan!')
+            return redirect('/daftarBuku')
+
+        except (MySQLdb.Error) as err:
+            flash('Buku gagal ditambahkan! %d: %s' % (err.args[0], err.args[1]))
+            return redirect('/daftarBuku')
 
     return render_template('tambahBuku.html')
 
 @app.route('/hapus/<kodeBuku>', methods = ['GET', 'POST'])
 def hapus(kodeBuku):
-    cursor = mysql.connection.cursor()
-    cursor.execute('DELETE FROM tbuku WHERE kodeBuku=%s', (kodeBuku,))
-    mysql.connection.commit()
-    cursor.close()
-    return redirect('/daftarBuku')
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('DELETE FROM tbuku WHERE kodeBuku=%s', (kodeBuku,))
+        mysql.connection.commit()
+        cursor.close()
+        
+        flash('Buku berhasil dihapus!')
+        return redirect('/daftarBuku')
+
+    except (MySQLdb.Error) as err:
+        flash('Buku gagal dihapus! %d: %s' % (err.args[0], err.args[1]))
+        return redirect('/daftarBuku')
 
 @app.route('/edit/<kodeBuku>', methods = ['GET', 'POST'])
 def edit(kodeBuku):
     if (request.method == 'POST'):
-        buku = request.form
-        kodeBuku = buku['kodebuku']
-        judulBuku = buku['judulbuku']
-        stok = buku['stok']
+        try:
+            buku = request.form
+            kodeBuku = buku['kodebuku']
+            judulBuku = buku['judulbuku']
+            stok = buku['stok']
 
-        cursor = mysql.connection.cursor()
-        cursor.execute('UPDATE tbuku SET judul=%s, stok=%s WHERE kodeBuku=%s', (judulBuku, stok, kodeBuku))
-        mysql.connection.commit()
-        cursor.close()
-        return redirect('/daftarBuku')
+            cursor = mysql.connection.cursor()
+            cursor.execute('UPDATE tbuku SET judul=%s, stok=%s WHERE kodeBuku=%s', (judulBuku, stok, kodeBuku))
+            mysql.connection.commit()
+            cursor.close()
+
+            flash('Buku berhasil diedit!')
+            return redirect('/daftarBuku')
+        
+        except (MySQLdb.Error) as err:
+            flash('Buku gagal diedit! %d: %s' % (err.args[0], err.args[1]))
+            return redirect('/daftarBuku')
     
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM tbuku WHERE kodeBuku=%s', (kodeBuku,))
@@ -92,23 +114,31 @@ def pinjam():
 @app.route('/tambahPinjam', methods = ['GET', 'POST'])
 def tambahPinjam():
     if (request.method == 'POST'):
-        pinjam = request.form
-        kodePinjam = pinjam['kodepinjam']
-        kodeBuku = pinjam['kodebuku']
-        nim = pinjam['NIM']
-        tanggalPinjam = pinjam['tanggalpinjam']
+        try:
+            pinjam = request.form
+            kodePinjam = pinjam['kodepinjam']
+            kodeBuku = pinjam['kodebuku']
+            nim = pinjam['NIM']
+            tanggalPinjam = pinjam['tanggalpinjam']
 
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT stok FROM tbuku WHERE kodeBuku=%s", (kodeBuku,))
-        stok = cursor.fetchall()
-        
-        if(stok[0][0] > 0):
-            cursor.execute("INSERT INTO tpinjam(kodePinjam, kodeBuku, NIM, tglPinjam) VALUES(%s, %s, %s, %s)", (kodePinjam, kodeBuku, nim, tanggalPinjam))
-            cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] - 1, kodeBuku))
-            mysql.connection.commit()
-            cursor.close()
-            return redirect('/pinjam')
-        else:
+            cursor = mysql.connection.cursor()
+            cursor.execute("SELECT stok FROM tbuku WHERE kodeBuku=%s", (kodeBuku,))
+            stok = cursor.fetchall()
+            
+            if(stok[0][0] > 0):
+                cursor.execute("INSERT INTO tpinjam(kodePinjam, kodeBuku, NIM, tglPinjam) VALUES(%s, %s, %s, %s)", (kodePinjam, kodeBuku, nim, tanggalPinjam))
+                cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] - 1, kodeBuku))
+                mysql.connection.commit()
+                cursor.close()
+                
+                flash('Berhasil meminjam buku!')
+                return redirect('/pinjam')
+            else:
+                flash('Gagal meminjam buku! Stok buku habis!')
+                return redirect('/pinjam')
+
+        except (MySQLdb.Error) as err:
+            flash('Gagal Pinjam! %d: %s' % (err.args[0], err.args[1]))
             return redirect('/pinjam')
 
     cursor = mysql.connection.cursor()
@@ -118,7 +148,6 @@ def tambahPinjam():
     cursor.execute('SELECT * FROM tanggota')
     nim = cursor.fetchall()
     cursor.close()
-
 
     return render_template('tambahPinjam.html', container = [kodeBuku, nim])
 
@@ -137,21 +166,28 @@ def kembali():
 @app.route('/tambahKembali', methods = ['GET', 'POST'])
 def tambahKembali():
     if (request.method == 'POST'):
-        kembali = request.form
-        kodeKembali = kembali['kodeKembali']
-        kodeBuku = kembali['kodebuku']
-        nim = kembali['NIM']
-        tanggalKembali = kembali['tanggalKembali']
+        try:
+            kembali = request.form
+            kodeKembali = kembali['kodeKembali']
+            kodeBuku = kembali['kodebuku']
+            nim = kembali['NIM']
+            tanggalKembali = kembali['tanggalKembali']
 
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT stok FROM tbuku WHERE kodeBuku=%s", (kodeBuku,))
-        stok = cursor.fetchall()
+            cursor = mysql.connection.cursor()
+            cursor.execute("SELECT stok FROM tbuku WHERE kodeBuku=%s", (kodeBuku,))
+            stok = cursor.fetchall()
+            
+            cursor.execute("INSERT INTO tkembali(kodeKembali, kodeBuku, NIM, tglKembali) VALUES(%s, %s, %s, %s)", (kodeKembali, kodeBuku, nim, tanggalKembali))
+            cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] + 1, kodeBuku))
+            mysql.connection.commit()
+            cursor.close()
+
+            flash('Berhasil mengembalikan buku!')
+            return redirect('/kembali')
         
-        cursor.execute("INSERT INTO tkembali(kodeKembali, kodeBuku, NIM, tglKembali) VALUES(%s, %s, %s, %s)", (kodeKembali, kodeBuku, nim, tanggalKembali))
-        cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] + 1, kodeBuku))
-        mysql.connection.commit()
-        cursor.close()
-        return redirect('/kembali')
+        except (MySQLdb.Error) as err:
+            flash('Gagal mengembalikan buku! %d: %s' % (err.args[0], err.args[1]))
+            return redirect('/kembali')
 
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM tbuku')
@@ -162,6 +198,84 @@ def tambahKembali():
     cursor.close()
 
     return render_template('tambahKembali.html', container = [kodeBuku, nim])
+
+# --------------------------------------------------
+# [CRUD] Anggota
+# --------------------------------------------------
+@app.route('/anggota', methods = ['GET', 'POST'])
+def daftarAnggota():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM tanggota')
+    hasil = cursor.fetchall()
+    
+    cursor.close()
+    return render_template('daftarAnggota.html', container = hasil)
+
+@app.route('/tambahAnggota', methods=['GET', 'POST'])
+def tambahAnggota():
+    if (request.method == 'POST'):
+        try:
+            anggota = request.form
+            nim = anggota['NIM']
+            namaMhs = anggota['namamahasiswa']
+            jurusan = anggota['jurusan']
+
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO tanggota(NIM, namaMhs, jurusan) VALUES(%s, %s, %s)', (nim, namaMhs, jurusan))
+            mysql.connection.commit()
+            cursor.close()
+            
+            flash('Berhasil menambahkan anggota!')
+            return redirect('/anggota')
+        
+        except (MySQLdb.Error) as err:
+            flash('Gagal menambahkan anggota! %d: %s' % (err.args[0], err.args[1]))
+            return redirect('/anggota')
+
+    return render_template('tambahAnggota.html')
+
+@app.route('/hapusAnggota/<NIM>', methods = ['GET', 'POST'])
+def hapusAnggota(NIM):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('DELETE FROM tanggota WHERE NIM=%s', (NIM,))
+        mysql.connection.commit()
+        cursor.close()
+
+        flash('Berhasil menghapus anggota!')
+        return redirect('/anggota')
+
+    except (MySQLdb.Error) as err:
+            flash('Gagal menghapus anggota! %d: %s' % (err.args[0], err.args[1]))
+            return redirect('/anggota')
+
+@app.route('/editAnggota/<NIM>', methods = ['GET', 'POST'])
+def editAnggota(NIM):
+    if (request.method == 'POST'):
+        try:
+            anggota = request.form
+            nim = anggota['NIM']
+            namaMhs = anggota['namamahasiswa']
+            jurusan = anggota['jurusan']
+
+            cursor = mysql.connection.cursor()
+            cursor.execute('UPDATE tanggota SET namaMhs=%s, jurusan=%s WHERE NIM=%s', (namaMhs, jurusan, nim))
+            mysql.connection.commit()
+            cursor.close()
+            
+            flash('Berhasil mengedit anggota!')
+            return redirect('/anggota')
+
+        except (MySQLdb.Error) as err:
+            flash('Gagal mengedit anggota! %d: %s' % (err.args[0], err.args[1]))
+            return redirect('/anggota')
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM tanggota WHERE NIM=%s', (NIM,))
+    hasil = cursor.fetchall()
+
+    cursor.close()
+    return render_template('editAnggota.html', container = hasil)
 
 # --------------------------------------------------
 # LOGIN

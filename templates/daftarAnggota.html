@@ -1,7 +1,7 @@
 {% extends './components/base.html' %} 
 
 {% block head %}
-<title>Daftar Pengembali</title>
+<title>Daftar Anggota</title>
 {% endblock %} 
 
 {% block body %} 
@@ -17,9 +17,9 @@
     </a>
     <a
       class="app__daftarBuku-tambah btn btn-sm btn-primary my-2"
-      href="{{ url_for('tambahKembali') }}"
+      href="{{ url_for('tambahAnggota') }}"
     >
-      <i class="bi bi-plus-square"></i> Tambah Kembali
+      <i class="bi bi-plus-square"></i> Tambah Anggota
     </a>
   </div>
 
@@ -29,15 +29,14 @@
     {% endif %}
   {% endwith %}
 
-
   <table
     class="app__daftarBuku-table table table-striped table-bordered text-center"
   >
     <tr class="table-primary align-items-center">
-      <th class="col-3 align-middle">Kode Kembali</th>
-      <th class="col-3 align-middle">Kode Buku</th>
       <th class="col-3 align-middle">NIM</th>
-      <th class="col-3 align-middle">Tanggal Kembali</th>
+      <th class="col-3 align-middle">Nama Mahasiswa</th>
+      <th class="col-3 align-middle">Jurusan</th>
+      <th class="col-3 align-middle">Action</th>
     </tr>
 
     {% for data in container %}
@@ -45,7 +44,14 @@
       <td class="align-middle">{{ data[0] }}</td>
       <td class="align-middle">{{ data[1] }}</td>
       <td class="align-middle">{{ data[2] }}</td>
-      <td class="align-middle">{{ data[3] }}</td>
+      <td>
+        <a class="col btn btn-sm btn-success m-1" href="editAnggota/{{ data[0] }}"
+          ><i class="bi bi-pencil-square"></i
+        ></a>
+        <a class="col btn btn-sm btn-danger m-1" href="hapusAnggota/{{ data[0] }}"
+          ><i class="bi bi-trash"></i
+        ></a>
+      </td>
     </tr>
     {% endfor %}
   </table>

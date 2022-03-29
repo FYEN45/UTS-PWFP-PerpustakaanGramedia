@@ -66,6 +66,7 @@ body {
 .app__home-slogan {
   color: var(--footer-background-color);
   background-color: var(--navbar-background-color);
+  font-size: 2.1rem;
 }
 
 .app__home-produk_label {
@@ -75,28 +76,32 @@ body {
 .app__home-produk_list {
   background-color: white;
   margin : 0.75rem 0;
-  padding : 1rem 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
 }
 
 .app__home-produk_list img{
-  width: 250px;
-  height: auto;
+  width: 100%;
 }
 
 .app__home-produk_list p {
   font-size: 1.2rem;
   text-align: center;
-  margin-top: 0.2rem;
+  margin-top: auto;
+  word-wrap: break-word;
 }
 
-.app__tentangSunlight h2 {
+.app__tentangKami h2 {
   font-weight: bold;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
-.app__tentangSunlight p {
+.app__tentangKami p {
   font-size: 1.3rem;
+  text-align: justify;
 }
 
 .app__profil {
