@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@800&display=swap");
+
+:root {
+  --default-font-size: 10px;
+  --font-family: "Inter", sans-serif;
+
+  --background-color: #f0f0f6;
+
+  --navbar-background-color: #e9f0a6;
+
+  --footer-background-color: #007826;
+
+  --font-color-light: white;
+  --font-color-gray: #585661;
+  --font-color-dark: black;
+}
+
+body {
+  background-color: var(--background-color);
+  font-size: var(--default-font-size);
+  font-family: var(--font-family);
+}
+
+.app__navbar {
+  font-size: 1.2rem;
+  background-color: var(--navbar-background-color);
+}
+
+.app__navbar-title {
+  color: black;
+  text-decoration: none;
+}
+
+.app__navbar a {
+    font-size: 1.6rem;
+    text-decoration: none;
+    color : var(--font-color-gray) !important;   
+}
+
+.app__navbar a:hover{
+    text-decoration: underline solid 1px !important;
+    color: black !important;
+    transition: ease 250ms;
+}
+
+.app__navbar img {
+  max-width: 75px !important;
+  min-width: 50px !important;
+}
+
+@media screen and (max-width:576px) {
+  .app__navbar-logo {
+    visibility: hidden;
+    position: fixed;
+  }
+
+  .app__navbar a {
+    font-size: 1.2rem; 
+}
+}
+
+.app__banner-banner {
+  width: 100%;
+}
+
+.app__home-slogan {
+  color: var(--footer-background-color);
+  background-color: #E9F0A6;
+}
+
+.app__home-produk_label {
+  color: var(--footer-background-color);
+}
+
+.app__home-produk_list {
+  background-color: white;
+  margin : 0.75rem 0;
+  padding : 1rem 0.5rem;
+}
+
+.app__home-produk_list img{
+  width: 300px;
+  height: auto;
+}
+
+.app__home-produk_list p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+.app__tentangSunlight h2 {
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.app__tentangSunlight p {
+  font-size: 1.3rem;
+}
+
+.app__profil {
+  background-color: #EFFFFD;
+}
+
+.app__profil-profil img {
+  width: 300px;
+  height: auto;
+  margin-bottom: 0.3rem;
+}
+
+@media screen and (max-width:992px) {
+  .app__profil-profil img {
+    width: 200px;
+  }
+}
+
+.app__profil-profil p {
+  font-size: 1.3rem;
+  margin-bottom: 0.1rem !important;
+}
+
+.app__daftarBuku {
+  background-color: white;
+}
+
+.app__daftarBuku-banner {
+  width: 100%;
+}
+
+.app__daftarBuku-table th {
+  font-size: 1.5rem;
+}
+
+.app__daftarBuku-table tr {
+  font-size: 1.2rem;
+}
+
+.app__daftarBuku-tambah {
+  font-size: 1.5rem;
+}
+
+.app__tambahBuku {
+    background-color: white;
+}
+
+.app__tambahBuku-inner {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.app__tambahBuku h1 {
+    font-weight: 800;
+}
+
+.app__tambahBuku label {
+    font-size: 1.5rem;
+}
+
+.app__footer {
+  background-color: var(--footer-background-color);
+  color: white;
+}
+
+.app__footer p {
+    font-size: 1.3rem;
+    margin-top: 0.15rem;
+    margin-bottom: 0.15rem;
+}
+
+@media screen and (max-width: 576px) {
+    .app__daftarBuku-table th {
+        font-size: 1rem;
+      }
+      
+      .app__daftarBuku-table tr {
+        font-size: 0.8rem;
+      }
+
+      .app__footer p{
+          font-size: 0.8rem;
+      }
+}
+
+@media screen and (min-width: 576px) {
+  .app__tambahBuku-inner {
+    width: 450px;
+  }
+}

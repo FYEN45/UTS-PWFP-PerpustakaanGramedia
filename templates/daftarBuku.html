@@ -1,0 +1,61 @@
+{% extends './components/base.html' %} 
+
+{% block head %}
+<title>Daftar Buku</title>
+{% endblock %} 
+
+{% block body %} 
+{% include './components/navbar.html' %}
+
+<div class="app__daftarBuku row px-3">
+  <div class="p-0 d-grid d-md-block">
+    <a
+      class="app__daftarBuku-tambah btn btn-sm btn-primary my-2"
+      href="{{ url_for('tambah') }}"
+    >
+      <i class="bi bi-plus-square"></i> Tambah Buku
+    </a>
+    <a
+      class="app__daftarBuku-tambah btn btn-sm btn-primary my-2"
+      href="{{ url_for('pinjam') }}"
+    >
+      <i class="bi bi-plus-square"></i> Peminjaman
+    </a>
+    <a
+      class="app__daftarBuku-tambah btn btn-sm btn-primary my-2"
+      href="{{ url_for('kembali') }}"
+    >
+      <i class="bi bi-plus-square"></i> Pengembalian
+    </a>
+  </div>
+
+  <table
+    class="app__daftarBuku-table table table-striped table-bordered text-center"
+  >
+    <tr class="table-primary align-items-center">
+      <th class="col-2 align-middle">Kode</th>
+      <th class="col-4 align-middle">Judul</th>
+      <th class="col-3 align-middle">Stok</th>
+      <th class="col-3 align-middle">Action</th>
+    </tr>
+
+    {% for data in container %}
+    <tr>
+      <td class="align-middle">{{ data[0] }}</td>
+      <td class="align-middle">{{ data[1] }}</td>
+      <td class="align-middle">{{ data[2] }}</td>
+      <td>
+        <a class="col btn btn-sm btn-success m-1" href="edit/{{ data[0] }}"
+          ><i class="bi bi-pencil-square"></i
+        ></a>
+        <a class="col btn btn-sm btn-danger m-1" href="hapus/{{ data[0] }}"
+          ><i class="bi bi-trash"></i
+        ></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% include './components/footer.html' %} 
+{% endblock body %}

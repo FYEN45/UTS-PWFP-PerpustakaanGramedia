@@ -1,0 +1,34 @@
+{% extends './components/base.html' %}
+
+{% block head %}
+<title>Sunlight - Tambah Buku</title>
+{% endblock %}
+
+{% block body %}
+{% include './components/navbar.html' %}
+
+<div class="app__tambahBuku row">
+    <div class="app__tambahBuku-inner">
+        <h1 class="text-center pt-4 pb-2">Edit Buku</h1>
+
+        <form method="POST" action="" class="">
+            <label class="d-block my-2" for="kodebuku">Kode buku</label>
+            <input class="form-control" type="text" id="kodebuku" name="kodebuku" value="{{ container[0][0] }}" readonly>
+
+            <label class="d-block my-2" for="judulbuku">Judul Buku</label>
+            <input class="form-control" type="text" id="judulbuku" name="judulbuku" value="{{ container[0][1] }}">
+
+            <label class="d-block my-2" for="stok">Stok</label>
+            <input class="form-control" type="number" id="stok" name="stok" value="{{ container[0][2] }}">
+
+            <div class="my-3 d-flex justify-content-end">
+                <a class="btn btn-danger" href="{{ url_for('daftar') }}">Batal</a>
+                <button class="btn btn-success ms-2" type="submit">Simpan</button>   
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include './components/footer.html' %}
+{% endblock body %}
+

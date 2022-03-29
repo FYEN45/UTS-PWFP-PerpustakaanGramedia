@@ -1,0 +1,41 @@
+{% extends './components/base.html' %} 
+
+{% block head %}
+<title>Sunlight</title>
+{% endblock %} 
+
+{% block body %}
+{% include './components/navbar.html' %}
+{% include './components/banner.html' %} 
+<div class="row app__home mb-5">
+    <h1 class="app__home-slogan text-center fw-bolder py-5">10x bersihkan lemak lebih lambat</h1>
+
+    <div class="app__home-produk">
+        <h1 class="app__home-produk_label text-center fw-bolder mt-5 mb-5">Produk</h1>
+        <div class="d-flex flex-wrap justify-content-around mx-5">
+            <div class="app__home-produk_list">
+                <img class="" src="../static/media/sunlight/sunlight-higienis-plus.avif" alt="">
+                <p>Sunlight Higenis Plus</p>
+            </div>
+            <div class="app__home-produk_list">
+                <img src="../static/media/sunlight/sunlight-anti-bau.avif" alt="">
+                <p>Sunlight Anti Bau</p>
+            </div>
+            <div class="app__home-produk_list">
+                <img src="../static/media/sunlight/sunlight-extra-pure.avif" alt="">
+                <p>Sunlight Extra Pure</p>
+            </div>
+            <div class="app__home-produk_list">
+                <img src="../static/media/sunlight/sunlight-extra-power.avif" alt="">
+                <p>Sunlight Extra Power</p>
+            </div>
+            <div class="app__home-produk_list">
+                <img src="../static/media/sunlight/sunlight-jeruk-nipis.avif" alt="">
+                <p>Sunlight Jeruk Nipis</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include './components/footer.html' %} 
+{% endblock body %}
