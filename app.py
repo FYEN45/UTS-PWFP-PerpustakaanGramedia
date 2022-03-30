@@ -125,17 +125,18 @@ def tambahPinjam():
             cursor.execute("SELECT stok FROM tbuku WHERE kodeBuku=%s", (kodeBuku,))
             stok = cursor.fetchall()
             
-            if(stok[0][0] > 1):
-                cursor.execute("INSERT INTO tpinjam(kodePinjam, kodeBuku, NIM, tglPinjam) VALUES(%s, %s, %s, %s)", (kodePinjam, kodeBuku, nim, tanggalPinjam))
-                cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] - 1, kodeBuku))
-                mysql.connection.commit()
-                cursor.close()
-                
-                flash('Berhasil meminjam buku!')
-                return redirect('/pinjam')
-            else:
-                flash('Gagal meminjam buku! Stok buku habis!')
-                return redirect('/pinjam')
+            if (stok):
+                if(stok[0][0] > 1):
+                    cursor.execute("INSERT INTO tpinjam(kodePinjam, kodeBuku, NIM, tglPinjam) VALUES(%s, %s, %s, %s)", (kodePinjam, kodeBuku, nim, tanggalPinjam))
+                    cursor.execute('UPDATE tbuku SET stok=%s WHERE kodeBuku=%s', (stok[0][0] - 1, kodeBuku))
+                    mysql.connection.commit()
+                    cursor.close()
+                    
+                    flash('Berhasil meminjam buku!')
+                    return redirect('/pinjam')
+                else:
+                    flash('Gagal meminjam buku! Stok buku habis!')
+                    return redirect('/pinjam')
 
         except (MySQLdb.Error) as err:
             flash('Gagal Pinjam! %d: %s' % (err.args[0], err.args[1]))
