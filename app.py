@@ -151,6 +151,21 @@ def tambahPinjam():
 
     return render_template('tambahPinjam.html', container = [kodeBuku, nim])
 
+@app.route('/hapusPinjam/<kodePinjam>', methods = ['GET', 'POST'])
+def hapusPinjam(kodePinjam):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('DELETE FROM tpinjam WHERE kodePinjam=%s', (kodePinjam,))
+        mysql.connection.commit()
+        cursor.close()
+        
+        flash('Peminjaman berhasil dihapus!')
+        return redirect('/pinjam')
+
+    except (MySQLdb.Error) as err:
+        flash('Peminjaman gagal dihapus! %d: %s' % (err.args[0], err.args[1]))
+        return redirect('/pinjam')
+
 # --------------------------------------------------
 # [C R] KEMBALI
 # --------------------------------------------------
@@ -198,6 +213,21 @@ def tambahKembali():
     cursor.close()
 
     return render_template('tambahKembali.html', container = [kodeBuku, nim])
+
+@app.route('/hapusKembali/<kodeKembali>', methods = ['GET', 'POST'])
+def hapusKembali(kodeKembali):
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('DELETE FROM tkembali WHERE kodeKembali=%s', (kodeKembali,))
+        mysql.connection.commit()
+        cursor.close()
+        
+        flash('Pengembalian berhasil dihapus!')
+        return redirect('/kembali')
+
+    except (MySQLdb.Error) as err:
+        flash('Pengembalian gagal dihapus! %d: %s' % (err.args[0], err.args[1]))
+        return redirect('/kembali')
 
 # --------------------------------------------------
 # [CRUD] Anggota

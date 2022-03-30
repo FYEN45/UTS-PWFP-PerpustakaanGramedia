@@ -34,10 +34,11 @@
     class="app__daftarBuku-table table table-striped table-bordered text-center"
   >
     <tr class="table-primary align-items-center">
-      <th class="col-3 align-middle">Kode Kembali</th>
-      <th class="col-3 align-middle">Kode Buku</th>
+      <th class="col-2 align-middle">Kode Kembali</th>
+      <th class="col-2 align-middle">Kode Buku</th>
       <th class="col-3 align-middle">NIM</th>
       <th class="col-3 align-middle">Tanggal Kembali</th>
+      <th class="col-2 align-middle">Action</th>
     </tr>
 
     {% for data in container %}
@@ -46,6 +47,11 @@
       <td class="align-middle">{{ data[1] }}</td>
       <td class="align-middle">{{ data[2] }}</td>
       <td class="align-middle">{{ data[3] }}</td>
+      <td>
+        <a class="col btn btn-sm btn-danger m-1" href="hapusKembali/{{ data[0] }}"
+          ><i class="bi bi-trash"></i
+        ></a>
+      </td>
     </tr>
     {% endfor %}
   </table>

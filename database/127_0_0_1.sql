@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2022 at 02:33 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.28
+-- Waktu pembuatan: 29 Mar 2022 pada 17.04
+-- Versi server: 10.4.18-MariaDB
+-- Versi PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `peminjamanbuku_db`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tanggota`
+-- Struktur dari tabel `tanggota`
 --
 
 CREATE TABLE `tanggota` (
@@ -36,17 +36,21 @@ CREATE TABLE `tanggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tanggota`
+-- Dumping data untuk tabel `tanggota`
 --
 
 INSERT INTO `tanggota` (`NIM`, `namaMhs`, `jurusan`) VALUES
-('3214', '3214', '43214'),
-('3333', '333', '3333');
+('32190034', 'Felix Setiawan', 'Teknik Informatika'),
+('32190041', 'Kelvin Chandra', 'Teknik Informatika'),
+('32190048', 'Kevin Kusuma', 'Teknik Informatika'),
+('32190052', 'Samuel Sulianto', 'Teknik Informatika'),
+('32190097', 'Reynaldo Krisno', 'Teknik Informatika'),
+('32190098', 'Ferry Gunawan', 'Teknik Informatika');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbuku`
+-- Struktur dari tabel `tbuku`
 --
 
 CREATE TABLE `tbuku` (
@@ -56,17 +60,23 @@ CREATE TABLE `tbuku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbuku`
+-- Dumping data untuk tabel `tbuku`
 --
 
 INSERT INTO `tbuku` (`kodeBuku`, `judul`, `stok`) VALUES
-('2131', '1231', 10),
-('tes2', 'tes2', 12);
+('B01', '7 in 1 Pemrograman Web untuk Pemula', 10),
+('B02', 'DEMON SLAYER Kimetsu no Yaiba 08', 4),
+('B03', 'Detektif Conan 99', 7),
+('B04', 'Jujutsu Kaisen 05', 3),
+('B05', 'Masakan Rumahan Lezat Dan Nikmat', 13),
+('B06', 'Merancang Aplikasi Dengan Metodologi Extreme Programmings', 25),
+('B07', 'Panduan Praktis Budidaya Dan Pemeliharaan Cupang', 55),
+('B08', 'Pemrograman Web Berbasis HTML 5, PHP, Dan JavaScript', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tkembali`
+-- Struktur dari tabel `tkembali`
 --
 
 CREATE TABLE `tkembali` (
@@ -76,18 +86,10 @@ CREATE TABLE `tkembali` (
   `tglKembali` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tkembali`
---
-
-INSERT INTO `tkembali` (`kodeKembali`, `kodeBuku`, `NIM`, `tglKembali`) VALUES
-('3123', 'tes2', '3214', '2022-03-18'),
-('626515', '2131', '3214', '2022-03-16');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tpinjam`
+-- Struktur dari tabel `tpinjam`
 --
 
 CREATE TABLE `tpinjam` (
@@ -97,20 +99,10 @@ CREATE TABLE `tpinjam` (
   `tglPinjam` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tpinjam`
---
-
-INSERT INTO `tpinjam` (`kodePinjam`, `kodeBuku`, `NIM`, `tglPinjam`) VALUES
-('12', 'tes2', '3214', '2022-03-17'),
-('1234', '2131', '3333', '2022-03-17'),
-('3336', '2131', '3214', '2022-03-10'),
-('6665', '2131', '3214', '2022-03-17');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -119,11 +111,12 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`username`, `password`) VALUES
 ('admin', 'admin123'),
+('chandra', 'kelvin123'),
 ('pergun', 'pergun451');
 
 --
@@ -131,19 +124,19 @@ INSERT INTO `user` (`username`, `password`) VALUES
 --
 
 --
--- Indexes for table `tanggota`
+-- Indeks untuk tabel `tanggota`
 --
 ALTER TABLE `tanggota`
   ADD PRIMARY KEY (`NIM`);
 
 --
--- Indexes for table `tbuku`
+-- Indeks untuk tabel `tbuku`
 --
 ALTER TABLE `tbuku`
   ADD PRIMARY KEY (`kodeBuku`);
 
 --
--- Indexes for table `tkembali`
+-- Indeks untuk tabel `tkembali`
 --
 ALTER TABLE `tkembali`
   ADD PRIMARY KEY (`kodeKembali`),
@@ -151,7 +144,7 @@ ALTER TABLE `tkembali`
   ADD KEY `NIM` (`NIM`);
 
 --
--- Indexes for table `tpinjam`
+-- Indeks untuk tabel `tpinjam`
 --
 ALTER TABLE `tpinjam`
   ADD PRIMARY KEY (`kodePinjam`),
@@ -159,24 +152,24 @@ ALTER TABLE `tpinjam`
   ADD KEY `NIM` (`NIM`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`);
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tkembali`
+-- Ketidakleluasaan untuk tabel `tkembali`
 --
 ALTER TABLE `tkembali`
   ADD CONSTRAINT `tkembali_ibfk_1` FOREIGN KEY (`kodeBuku`) REFERENCES `tbuku` (`kodeBuku`),
   ADD CONSTRAINT `tkembali_ibfk_2` FOREIGN KEY (`NIM`) REFERENCES `tanggota` (`NIM`);
 
 --
--- Constraints for table `tpinjam`
+-- Ketidakleluasaan untuk tabel `tpinjam`
 --
 ALTER TABLE `tpinjam`
   ADD CONSTRAINT `tpinjam_ibfk_1` FOREIGN KEY (`kodeBuku`) REFERENCES `tbuku` (`kodeBuku`),
