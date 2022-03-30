@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Mar 2022 pada 17.04
+-- Waktu pembuatan: 30 Mar 2022 pada 06.00
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 8.0.3
 
@@ -64,12 +64,12 @@ CREATE TABLE `tbuku` (
 --
 
 INSERT INTO `tbuku` (`kodeBuku`, `judul`, `stok`) VALUES
-('B01', '7 in 1 Pemrograman Web untuk Pemula', 10),
-('B02', 'DEMON SLAYER Kimetsu no Yaiba 08', 4),
+('B01', '7 in 1 Pemrograman Web untuk Pemula', 9),
+('B02', 'DEMON SLAYER Kimetsu no Yaiba 08', 3),
 ('B03', 'Detektif Conan 99', 7),
 ('B04', 'Jujutsu Kaisen 05', 3),
 ('B05', 'Masakan Rumahan Lezat Dan Nikmat', 13),
-('B06', 'Merancang Aplikasi Dengan Metodologi Extreme Programmings', 25),
+('B06', 'Merancang Aplikasi Dengan Metodologi Extreme Programmings', 24),
 ('B07', 'Panduan Praktis Budidaya Dan Pemeliharaan Cupang', 55),
 ('B08', 'Pemrograman Web Berbasis HTML 5, PHP, Dan JavaScript', 1);
 
@@ -86,6 +86,15 @@ CREATE TABLE `tkembali` (
   `tglKembali` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tkembali`
+--
+
+INSERT INTO `tkembali` (`kodeKembali`, `kodeBuku`, `NIM`, `tglKembali`) VALUES
+('RC01', 'B05', '32190048', '2022-04-07'),
+('RC02', 'B01', '32190098', '2022-04-10'),
+('RC03', 'B07', '32190041', '2022-03-30');
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +107,15 @@ CREATE TABLE `tpinjam` (
   `NIM` varchar(20) NOT NULL,
   `tglPinjam` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tpinjam`
+--
+
+INSERT INTO `tpinjam` (`kodePinjam`, `kodeBuku`, `NIM`, `tglPinjam`) VALUES
+('BC01', 'B07', '32190041', '2022-03-10'),
+('BC02', 'B01', '32190098', '2022-03-14'),
+('BC03', 'B05', '32190048', '2022-03-28');
 
 -- --------------------------------------------------------
 
