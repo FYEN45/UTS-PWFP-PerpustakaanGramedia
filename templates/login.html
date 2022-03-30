@@ -10,6 +10,11 @@
 <div class="app__tambahBuku row">
     <div class="app__tambahBuku-inner">
         <h1 class="text-center pt-4 pb-2">Login</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger p-3"><h4 class="p-0 m-0">{{ messages[0] }}</h4></div>
+            {% endif %}
+        {% endwith %}
         <form method="POST" action="" class="">
             <label class="d-block my-2" for="username">Username</label>
             <input class="form-control" type="text" id="username" name="username" required maxlength="100">

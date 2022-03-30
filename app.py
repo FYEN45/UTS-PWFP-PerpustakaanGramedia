@@ -323,7 +323,11 @@ def login():
         hasil = cursor.fetchall()
         
         if (len(hasil) > 0):
+            flash('Login Berhasil! Welcome %s!' % username)
             return redirect('/daftarBuku')
+        else:
+            flash('Username & Password salah!')
+            return render_template('login.html')
 
     return render_template('login.html')
     
