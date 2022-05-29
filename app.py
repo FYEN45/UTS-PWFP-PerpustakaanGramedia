@@ -243,7 +243,6 @@ def kembali():
 # Menampilkan halaman tambah pengembali
 # Apabila form pada halaman tambah pengembali melakukan POST maka akan mengambil data yang dikirim dari form untuk melakukan percobaan menambahkan pengembali dalam tabel kembali.
 # Apabila sukses / gagal menambahkan pengembali dalam database akan menampilkan pesan dan redirect ke halaman Daftar Pengembali
-@app.route('/tambahPinjam', methods = ['GET', 'POST'])
 @app.route('/tambahKembali', methods = ['GET', 'POST'])
 def tambahKembali():
     if (request.method == 'POST'):
