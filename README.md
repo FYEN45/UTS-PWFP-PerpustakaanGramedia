@@ -5,7 +5,7 @@
 - Autentikasi pengguna.
 - Mengelolah data Buku
 - Mengelolah data Peminjaman Buku
-- Mengelolah data Pengguna
+- Mengelolah data Pengguna / Anggota
 
 Website ini dibuat menggunakan teknologi :
 **_HTML, CSS, Bootstrap, Python, Flask, MySQL_**
