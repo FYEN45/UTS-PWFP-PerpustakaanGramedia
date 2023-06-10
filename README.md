@@ -1,26 +1,62 @@
-# Perpustakaan Gramedia
-Merupakan project website Perpustakaan yang dapat menyimpan data data buku, anggota, pengembalian buku, dan peminjaman buku.
+# UTS-PWFP-PerpustakaanGramedia
 
-# Cara untuk mempersiapkan dan menjalankan project
-- Pull dari github / download project
-- Pindah ke directory project                                   [$ cd ...]
-- Bikin virtual env (jika belum ada),                           [$ python -m venv env]
-- Aktifin scripts                                               [$ env/Scripts/activate]
-- Donlod smua requirements project (ada dalem requirements.txt) [$ pip install -r requirements.txt]
-- Setup project flask                                           [$ set NamaProject=app.py]
-- Menjalankan project project                                   [$ flask run] atau [$ python app.py]
+- Dibuat untuk kepentingan **Ujian Tengah Semester Pemrograman Web**.
+- Dibuat bersama kelompok (Ferry, Kelvin, Kevin)
+- Autentikasi pengguna.
+- Mengelolah data Buku
+- Mengelolah data Peminjaman Buku
+- Mengelolah data Pengguna
 
-# Database ( Menggunakan XAMPP )
-- Dalam folder project ada folder database
-- Nyalakan XAMPP ( Apache & MySQL )
-- Buka http://localhost/phpmyadmin
-- Import file sql ke Database anda
+Website ini dibuat menggunakan teknologi :
+**_HTML, CSS, Bootstrap, Python, Flask, MySQL_**
 
-# Login Website
-Untuk login website bisa menggunakan,
-username = 'admin'
-password = 'admin123'
+# Tampilan Website
 
-Source :
-- Pembahasan Import & Export Requirement Virtual Environment
-https://stackoverflow.com/questions/14684968/how-to-export-virtualenv
+## Halaman Utama
+
+![Utama-1](images/image.png)
+![Utama-2](images/image-1.png)
+
+## Halaman Tentang Kami
+
+![Tentang Kami](images/image-2.png)
+
+## Halaman Login
+
+![Login](images/image-3.png)
+
+## Halaman Daftar Buku
+
+![Daftar Buku](images/image-4.png)
+
+## Halaman Tambah Buku
+
+![Edit Buku](images/image-5.png)
+
+## Halaman Daftar Anggota
+
+![Daftar Anggota](images/image-6.png)
+
+## Halaman Tambah Anggota
+
+![Tambah Anggota](images/image-8.png)
+
+## Halaman Edit Anggota
+
+![Edit Anggota](images/image-7.png)
+
+## Halaman Peminjaman
+
+![Peminjaman](images/image-9.png)
+
+## Halaman Tambah Peminjaman
+
+![Tambah Peminjaman](images/image-10.png)
+
+## Halaman Pengembalian
+
+![Pengembalian](images/image-11.png)
+
+## Halaman Tambah Pengembalian
+
+![Tambah Pengembalian](images/image-12.png)
